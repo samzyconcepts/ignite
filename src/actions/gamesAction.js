@@ -10,11 +10,11 @@ export const loadGames = () => async (dispatch) => {
     const upcomingGamesData = await axios.get(upcomingGamesURL());
 
     dispatch({
-        type: "FETCH_GAMES",
+        type: "FETCH_DATA",
         payload: {
-            popular: popularGamesData.data.result,
-            upcoming: upcomingGamesData.data.result,
-            newGames: newGamesData.data.result
+            popular: popularGamesData.data.results,
+            upcoming: upcomingGamesData.data.results,
+            newGames: newGamesData.data.results,
         },
     });
 };
