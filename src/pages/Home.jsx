@@ -6,12 +6,18 @@ import { loadGames } from "../actions/gamesAction";
 
 // component
 import Game from "../component/Game";
+import GameDetails from "../component/GameDetails";
 
 // style and animation
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { useLocation } from "react-router-dom";
 
 const Home = () => {
+    // get location
+    const location = useLocation()
+    const pathId = location.pathname.split('/')[2]
+
     // FETCH GAME
     const dispatch = useDispatch();
 
@@ -24,6 +30,7 @@ const Home = () => {
 
     return (
         <GameList>
+            {pathId && <GameDetails />}
             <h2>Upcoming Games</h2>
             <Games>
                 {upcoming.map((game) => (
@@ -74,7 +81,7 @@ const Games = styled(motion.div)`
     min-height: 80vh;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-    gap: 5rem 3rem ;
+    gap: 5rem 3rem;
 `;
 
 export default Home;
