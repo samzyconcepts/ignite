@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 // Redux
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +12,7 @@ import GameDetails from "../component/GameDetails";
 // style and animation
 import styled from "styled-components";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
-import { useLocation } from "react-router-dom";
+import { fadeIn } from "../animation";
 
 const Home = () => {
     // get location
@@ -29,7 +30,7 @@ const Home = () => {
     const { popular, newGames, upcoming, searched } = useSelector((state) => state.games);
 
     return (
-        <GameList>
+        <GameList variants={fadeIn} initial="hidden" animate="show">
             <LayoutGroup type="crossfade">
                 <AnimatePresence>{pathId && <GameDetails pathId={pathId} />}</AnimatePresence>
                 {searched.length ? (
