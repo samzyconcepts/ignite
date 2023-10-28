@@ -2,20 +2,21 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 // Redux
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import { smallImage } from "../util";
 
-const GameDetails = () => {
-    const navigate = useNavigate()
+const GameDetails = ({ pathId }) => {
+    const navigate = useNavigate();
 
     // Exit Detail
     const exitDetailHandler = (e) => {
         const element = e.target;
 
-        if(element.classList.contains("shadow")){
-            document.body.style.overflow = "auto"
-            navigate("/")
+        if (element.classList.contains("shadow")) {
+            document.body.style.overflow = "auto";
+            navigate("/");
         }
-    }
+    };
 
     // Data
     const { game, screen, isLoading } = useSelector((state) => state.detail);
@@ -24,10 +25,10 @@ const GameDetails = () => {
         <>
             {!isLoading && (
                 <CardShadow className="shadow" onClick={exitDetailHandler}>
-                    <Detail>
+                    <Detail layoutId={pathId}>
                         <Stats>
                             <div className="rating">
-                                <h3>{game.name}</h3>
+                                <motion.h3 layoutId={`title ${pathId}`}>{game.name}</motion.h3>
                                 <p>Rating: {game.rating}</p>
                             </div>
                             <Info>
@@ -40,12 +41,16 @@ const GameDetails = () => {
                             </Info>
                         </Stats>
                         <Media>
-                            <img src={game.background_image} alt="image" />
+                            <motion.img
+                                layoutId={`image ${pathId}`}
+                                src={smallImage(game.background_image, 1280)}
+                                alt="image"
+                            />
                         </Media>
                         <Description>{game.description_raw}</Description>
                         <div className="gallery">
                             {screen.map((shot) => (
-                                <img src={shot.image} key={shot.id} alt="image" />
+                                <img src={smallImage(shot.image, 1280)} key={shot.id} alt="image" />
                             ))}
                         </div>
                     </Detail>

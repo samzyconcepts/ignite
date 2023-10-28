@@ -10,13 +10,13 @@ import GameDetails from "../component/GameDetails";
 
 // style and animation
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { useLocation } from "react-router-dom";
 
 const Home = () => {
     // get location
-    const location = useLocation()
-    const pathId = location.pathname.split('/')[2]
+    const location = useLocation();
+    const pathId = location.pathname.split("/")[2];
 
     // FETCH GAME
     const dispatch = useDispatch();
@@ -30,43 +30,45 @@ const Home = () => {
 
     return (
         <GameList>
-            {pathId && <GameDetails />}
-            <h2>Upcoming Games</h2>
-            <Games>
-                {upcoming.map((game) => (
-                    <Game
-                        key={game.id}
-                        name={game.name}
-                        released={game.released}
-                        image={game.background_image}
-                        id={game.id}
-                    />
-                ))}
-            </Games>
-            <h2>Popular Games</h2>
-            <Games>
-                {popular.map((game) => (
-                    <Game
-                        key={game.id}
-                        name={game.name}
-                        released={game.released}
-                        image={game.background_image}
-                        id={game.id}
-                    />
-                ))}
-            </Games>
-            <h2>New Games</h2>
-            <Games>
-                {newGames.map((game) => (
-                    <Game
-                        key={game.id}
-                        name={game.name}
-                        released={game.released}
-                        image={game.background_image}
-                        id={game.id}
-                    />
-                ))}
-            </Games>
+            <LayoutGroup type="crossfade">
+                <AnimatePresence>{pathId && <GameDetails pathId={pathId} />}</AnimatePresence>
+                <h2>Upcoming Games</h2>
+                <Games>
+                    {upcoming.map((game) => (
+                        <Game
+                            key={game.id}
+                            name={game.name}
+                            released={game.released}
+                            image={game.background_image}
+                            id={game.id}
+                        />
+                    ))}
+                </Games>
+                <h2>Popular Games</h2>
+                <Games>
+                    {popular.map((game) => (
+                        <Game
+                            key={game.id}
+                            name={game.name}
+                            released={game.released}
+                            image={game.background_image}
+                            id={game.id}
+                        />
+                    ))}
+                </Games>
+                <h2>New Games</h2>
+                <Games>
+                    {newGames.map((game) => (
+                        <Game
+                            key={game.id}
+                            name={game.name}
+                            released={game.released}
+                            image={game.background_image}
+                            id={game.id}
+                        />
+                    ))}
+                </Games>
+            </LayoutGroup>
         </GameList>
     );
 };
