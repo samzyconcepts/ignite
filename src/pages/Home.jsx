@@ -26,12 +26,30 @@ const Home = () => {
     }, [dispatch]);
 
     // GET THE DATA FROM THE REDUX STATE
-    const { popular, newGames, upcoming } = useSelector((state) => state.games);
+    const { popular, newGames, upcoming, searched } = useSelector((state) => state.games);
 
     return (
         <GameList>
             <LayoutGroup type="crossfade">
                 <AnimatePresence>{pathId && <GameDetails pathId={pathId} />}</AnimatePresence>
+                {searched.length ? (
+                    <div className="searched">
+                        <h2>Searched Games</h2>
+                        <Games>
+                            {searched.map((game) => (
+                                <Game
+                                    key={game.id}
+                                    name={game.name}
+                                    released={game.released}
+                                    image={game.background_image}
+                                    id={game.id}
+                                />
+                            ))}
+                        </Games>
+                    </div>
+                ) : (
+                    ""
+                )}
                 <h2>Upcoming Games</h2>
                 <Games>
                     {upcoming.map((game) => (

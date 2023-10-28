@@ -50,3 +50,6 @@ export const gameDetailsURL = (game_id) =>
 // GAME SCREENSHOTS
 export const gameScreenshotURL = (game_id) =>
     `${base_url}games/${game_id}/screenshots?key=${import.meta.env.VITE_APP_IGNITE_API}`;
+
+export const searchedGameURL = (game_name) =>
+    `${base_url}games?key=${import.meta.env.VITE_APP_IGNITE_API}&search=${game_name}&page_size=9`;

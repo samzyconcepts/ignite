@@ -151,7 +151,7 @@ const Stats = styled(motion.div)`
     align-items: center;
     justify-content: space-between;
 
-    img{
+    img {
         width: 2rem;
         height: 2rem;
         display: inline;
@@ -172,8 +172,6 @@ const Media = styled(motion.div)`
     margin-top: 5rem;
     img {
         width: 100%;
-        /* height: 60vh;
-        object-fit: cover; */
     }
 `;
 
